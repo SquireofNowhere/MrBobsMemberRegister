@@ -16,6 +16,4 @@ company appointed you as a developer to develop an application.
 
 ## Things I need to be working on and how I will do them.
 ### Storage of members
-I will be using the System.IO File Class to store each member
-### Storage of Art
-well... if i can find a way to read past a certain point I can use the existing file but if i cannot then I suppose another file will suffice
+I will be using SQL Server LocalDB as it will let me use a pretty extensive data collection system while also being local so my users will not need to install any extra things on their device to use this application. A W for Mr Bob.
