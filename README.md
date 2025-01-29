@@ -1,6 +1,6 @@
 # MrBobsMemberRegister
 
-##Synopsis
+## Synopsis
 Mr Bob has been running an art shop since 2016. His business approach is that any artist can become 
 a member by registering in the shop. He has to register them manually, capturing details such as 
 Surname and Name, the name of the artwork, the category of the work, size of the work, number 
