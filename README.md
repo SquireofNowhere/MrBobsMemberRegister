@@ -1,4 +1,4 @@
-# MrBobsMemberRegister
+# MrBobsMemberRegister (C# app using IntelliJ IDE)
 
 ## Synopsis
 Mr Bob has been running an art shop since 2016. His business approach is that any artist can become 
