@@ -8,3 +8,14 @@ of pieces and expected price etc. Each registered member can place their artwork
 shop for 10 months. They have to pay the rent to Mr Bob to keep their work in the shop. Rent is on 
 a daily basis. If he sells any item he gets a 25% commission of selling price. Rent rate is according to 
 the size of the art.
+
+He has to capture the sold items with relevant details manually. Mr Bob is tired of this manual 
+process. Hence he decided to automate his shop with some more features. He, therefore, 
+approached the company “SoftwareTech solution” to develop an application for this Art Shop. The 
+company appointed you as a developer to develop an application. 
+
+## Things I need to be working on and how I will do them.
+### Storage of members
+I will be using the System.IO File Class to store each member
+### Storage of Art
+well... if i can find a way to read past a certain point I can use the existing file but if i cannot then I suppose another file will suffice
