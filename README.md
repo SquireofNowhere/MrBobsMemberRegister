@@ -27,22 +27,22 @@ I will be using SQL Server LocalDB as it will let me use a pretty extensive data
 
 ### Tables 
 Users
-	Name - unique
+	Name - unique  
 	password - hidden (figure out how to do that fr)
 	
 Members
-	Id - unique
-	Name
-	Surname
-	number of artworks
-	rent (calculated from artworks)
+	Id - unique  
+	Name  
+	Surname  
+	number of artworks  
+	rent (calculated from artworks)  
 Artworks 
-	Id - unique 
-	Owner
-	Name
-	Category
-	Size
-	expected price
+	Id - unique  
+	Owner  
+	Name  
+	Category  
+	Size  
+	expected price  
 	sold price
 	
 	
