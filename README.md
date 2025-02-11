@@ -47,6 +47,7 @@ Artworks
 	Name  
 	Category  
 	Size  
+	SizeInt / int / length x breadth  
 	expected price  
 	sold price
 	<pre>
