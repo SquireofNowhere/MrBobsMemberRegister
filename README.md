@@ -19,7 +19,7 @@ this app is made for Mr Bob, to be used by him and his employees .
 not everyone should be able to access and change things.
 
 ## Things I need to be working on and how I will do them.
-<pre>
+
 ### security to keep out customers lol
 password hashing i believe
 
@@ -27,6 +27,7 @@ password hashing i believe
 I will be using SQL Server LocalDB as it will let me use a pretty extensive data collection system while also being local so my users will not need to install any extra things on their device to use this application. A W for Mr Bob.
 
 ### Tables 
+<pre>
 Users
 	Name - unique  
 	password - hidden (figure out how to do that fr)
