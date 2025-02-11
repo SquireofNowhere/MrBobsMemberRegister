@@ -19,6 +19,7 @@ this app is made for Mr Bob, to be used by him and his employees .
 not everyone should be able to access and change things.
 
 ## Things I need to be working on and how I will do them.
+<pre>
 ### security to keep out customers lol
 password hashing i believe
 
@@ -36,6 +37,7 @@ Members
 	Surname  
 	number of artworks  
 	rent (calculated from artworks)  
+	
 Artworks 
 	Id - unique  
 	Owner  
@@ -44,5 +46,5 @@ Artworks
 	Size  
 	expected price  
 	sold price
-	
+	<pre>
 	
