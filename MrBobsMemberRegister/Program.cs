@@ -18,7 +18,16 @@ namespace MrBobsMemberRegister
             DBConnect conn = new DBConnect(connString);
             conn.Connect();
 
+            Users user;
+            //catches user that signed in
+            do
+            {
+                user = LoginScreen();
+            }
+            while (user != null);
+            
            
+
             while (true)
             {
                 Console.Clear();
@@ -73,6 +82,110 @@ namespace MrBobsMemberRegister
           
         }
 
+        static Users LoginScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("1. Login");
+            Console.WriteLine("2. Register");
+            Console.WriteLine("3. See all Users");
+            Console.WriteLine("0. Exit Application\n");
+
+            ConsoleKeyInfo choice = Console.ReadKey(false);
+
+            switch (choice.KeyChar)
+            {
+                case '0':
+
+                    Console.Clear();
+                    Console.WriteLine("Exiting...");
+                    Environment.Exit(0); // exits the application
+                    break;
+
+                case '1':
+
+                    Console.WriteLine("Enter your username: ");
+                    string username = Console.ReadLine();
+    
+                    Console.WriteLine("Enter your password: ");
+                    string password = Console.ReadLine();
+
+                    Users user = new Users(username, password);
+
+                    //entering info loop
+                    while (true)
+                    {
+                        if (user.Exists())
+                        {
+                            if (user.CheckPassword(user.PasswordHash))
+                            {
+                                //returns the user if the password is correct
+                                Console.WriteLine("User exists and password is correct");
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Password is incorrect");
+                                Console.WriteLine("Enter your password or press 0 to cancel: ");
+
+                                switch (Console.ReadLine())
+                                {
+                                    case "0":
+                                        //returning null restarts LoginScreen method
+                                        return null;
+
+                                    default:
+                                        user.PasswordHash = Console.ReadLine();
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("User does not exist in the database");
+                            Console.WriteLine("Enter your username or press 0 to cancel: ");
+
+                            switch (Console.ReadLine())
+                            {
+                                case "0":
+                                    //returning null restarts LoginScreen method
+                                    return null;
+
+                                default:
+                                    user.Name = Console.ReadLine();
+                                    break;
+                            }
+                        }
+                    }
+                    
+                    
+                    //exits login screen loop with verified user
+                    return user;
+
+                case '2':
+                    return Register();
+
+                case '3':
+                    return null;
+
+                default:
+                    //code for if someone presses an option not on the menu
+                    if (choice.Key == ConsoleKey.Enter)
+                    {
+                        Console.Write("Pressing nothing is an invalid choice\nPress anything!");
+                    }
+                    else
+                    {
+                        Console.Write(" is an invalid choice\nPress anything!");
+                    }
+                    Console.ReadKey(true);
+                    break;
+            }
+
+            
+
+
+            return new Users(username, password);
+        }
         //menu for database options
         static void DatabaseOptionsMenu(DBConnect conn)
         {
