@@ -53,11 +53,14 @@ namespace MrBobsMemberRegister
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        Console.WriteLine("Tables in the database:");
+                        Console.WriteLine("\nTables in the database:");
                         while (reader.Read())
                         {
                             Console.WriteLine(reader["TABLE_NAME"].ToString());
                         }
+
+                        Console.WriteLine("\nPress any key to continue");
+                        Console.ReadKey(true);
                     }
                 }
             }
