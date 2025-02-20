@@ -91,6 +91,7 @@ namespace MrBobsMemberRegister
             Console.WriteLine("0. Exit Application\n");
 
             ConsoleKeyInfo choice = Console.ReadKey(false);
+            Users user = null;
 
             switch (choice.KeyChar)
             {
@@ -109,7 +110,7 @@ namespace MrBobsMemberRegister
                     Console.WriteLine("Enter your password: ");
                     string password = Console.ReadLine();
 
-                    Users user = new Users(username, password);
+                    user = new Users(username, password);
 
                     //entering info loop
                     while (true)
@@ -162,7 +163,8 @@ namespace MrBobsMemberRegister
                     return user;
 
                 case '2':
-                    return Register();
+                    Console.WriteLine("Register()");
+                    return null;
 
                 case '3':
                     return null;
@@ -180,11 +182,8 @@ namespace MrBobsMemberRegister
                     Console.ReadKey(true);
                     break;
             }
-
-            
-
-
-            return new Users(username, password);
+  
+            return user;
         }
         //menu for database options
         static void DatabaseOptionsMenu(DBConnect conn)

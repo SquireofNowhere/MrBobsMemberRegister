@@ -18,11 +18,20 @@ company appointed you as a developer to develop an application.
 this app is made for Mr Bob, to be used by him and his employees .
 not everyone should be able to access and change things.
 
+## Things you are actually working on... bozo
+- [x] BCrypt is not working... is it installed?? who knows
+    - it WAS installed. it wasnt working... and then it just started working... i have zero idea why
+- [ ] many menu options still not working
+    - [ ] make sure you mark which ones are not done... which is a lot
+- [ ] localDB seems alright but theres no actual data in it.
+
 ## Things I need to be working on and how I will do them.
+
 
 ### security to keep out customers lol
 password hashing i believe  
 using BCrypt.Net-Next for hashing (Nuget Package)
+	install w
 
 
 ### Storage of members
