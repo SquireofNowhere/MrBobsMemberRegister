@@ -31,9 +31,10 @@ namespace MrBobsMemberRegister
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Welcome to Mr Bob's Member Register");
+                Console.WriteLine("=== Welcome to Mr Bob's Member Register ===\nSigned in as: " + user.Name + "\n");
                 Console.WriteLine("1. Database options");
                 Console.WriteLine("2. Member Management");
+                Console.WriteLine("3. Logoff");
                 Console.WriteLine("0. Exit Application\n");
 
 
@@ -56,10 +57,24 @@ namespace MrBobsMemberRegister
 
                     case '2':
 
-                        Console.Clear();
-                        Console.WriteLine("1. Members");
-                        Console.WriteLine("2. Manage Members");
+                        MemberMenu();
+                        
                         break;
+
+                    case '3':
+                        Console.Clear();
+                        Console.WriteLine("Logging Off...");
+                        Console.ReadKey();
+                        user = null;
+
+                        do
+                        {
+                            user = LoginScreen();
+                        }
+                        while (user == null);
+
+                        break;
+
 
                     default:
 
@@ -85,6 +100,7 @@ namespace MrBobsMemberRegister
         static Users LoginScreen()
         {
             Console.Clear();
+            Console.WriteLine("=== Sign in Menu ===");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Register");
             Console.WriteLine("3. See all Users");
@@ -150,7 +166,7 @@ namespace MrBobsMemberRegister
                         }
                         else
                         {
-                            Console.WriteLine("User does not exist in the database");
+                            
                             Console.WriteLine("Press anything to try again or press 0 to cancel: ");
 
                             switch (Console.ReadKey(true).KeyChar)
@@ -193,9 +209,22 @@ namespace MrBobsMemberRegister
 
                     return null;
 
-                case '3':
+                case '3': //See all Users
 
-                    Console.WriteLine("\n\nOption under maintenance!\nPress anything to pick again!");
+                    List<Users> users = new List<Users>();
+                    Users userList = new Users();
+
+                    users = user.allUsers();
+                    Console.WriteLine("\n");
+
+                    Console.WriteLine("=== All Users ===\n");
+
+                    foreach (var person in users)
+                    {
+                        Console.WriteLine(person.ToString());
+                    }
+
+                    Console.WriteLine("\nPress anything to go back!");
                     Console.ReadKey(true);
                     return null;
 
@@ -275,5 +304,57 @@ namespace MrBobsMemberRegister
             }
             
         }
+
+        static void MemberMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Membership Menu ===");
+            Console.WriteLine("1. Members");
+            Console.WriteLine("2. Manage Members");
+
+            ConsoleKeyInfo choice = Console.ReadKey(false);
+
+            switch (choice.KeyChar)
+            {
+
+                case '1'://members
+
+                    List<Members> members = new List<Members>();
+                    Members member = new Members();
+
+                    members = member.allmembers();
+                    Console.WriteLine("\n");
+
+                    Console.WriteLine("choose a member!\n");
+
+                    foreach (var person in members)
+                    {       
+                        Console.WriteLine(person.ToString());
+                    }
+
+                    ConsoleKeyInfo choiceMember = Console.ReadKey(false);
+
+                    switch (choiceMember.KeyChar)
+                    {
+                        case '0':
+                            break;
+                            case '1':
+                            break;
+                        default:
+                            break;
+                    }
+
+                    Console.WriteLine("\nPress 0 to return to Member menu!");
+                    Console.ReadKey(); 
+                    break;
+
+                case '2': //manage members
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
+
 }

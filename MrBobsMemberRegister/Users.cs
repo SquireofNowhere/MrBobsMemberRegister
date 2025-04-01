@@ -21,6 +21,7 @@ namespace MrBobsMemberRegister
             Password = password;
         }
 
+
         //constructer for existing users
         public Users() { }
 
@@ -103,7 +104,40 @@ namespace MrBobsMemberRegister
             
         }
 
-        
+        public List<Users> allUsers()
+        {
+            List<Users> users = new List<Users>();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                string query = "SELECT * FROM Bob_Users";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Users user = new Users();
+
+                            user.Name = reader["Name"].ToString();                          
+
+                            users.Add(user);
+                        }
+                    }
+                }
+            }
+
+
+            return users;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+
 
     }
 }

@@ -20,20 +20,28 @@ not everyone should be able to access and change things.
 
 Hashing a duplicate password will not give the same hash.
 
+
 ## tiny features
  - when picking menu item a number shows to show which menu you picked.
+ - member class methods return a bool that shows whether they succeeded or not
 
 
 ## Things you are actually working on... bozo
 - [x] BCrypt is not working... is it installed?? who knows
     - it WAS installed. it wasnt working... and then it just started working... i have zero idea why
 - [ ] many menu options still not working
-    - [ ] you need to work on registering users into the database (you currrently can't login)
+    - [x] Member menu does nothing.
+    - [x] you need to work on registering users into the database (you currrently can't login)
+	- [x] show all users option does not show all users.
+    - [ ] a way to delete users would also be nice (Admin only of course)
     - [ ] make sure you mark which ones are not done... which is a lot
 - [ ] localDB seems alright but theres no actual data in it.
+    - [ ] member table needs to count how many artworks a member has at any given time. 
+    	-  might use an update statement in code to just update the count every time a new artwork is added or deleted and stuff...
+	- [ ] dynamically changing switch statement(?) to choose members in the database?
 
 ### Problems currently being faced. bugs
-- [x] show all users option does not show all options. goes to the wrong menu (was a logic issue)
+- [ ] show all users option does not show all options. goes to the wrong menu (was a logic issue)
 
 ## Things I need to be working on and how I will do them.
 
