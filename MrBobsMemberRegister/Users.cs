@@ -12,15 +12,17 @@ namespace MrBobsMemberRegister
     {
         private string connString = @"Server=(localdb)\MSSQLLocalDB;Database=MrBobArtDB;Integrated Security=true;";
         public string Name { get; set; }
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
 
-        //constructor used when creating a new user, automatically hashes the password
+        //constructor used when creating a new user
         public Users(string name, string password)
         {
             Name = name;
-            PasswordHash = HashPassword(password);
-           
+            Password = password;
         }
+
+        //constructer for existing users
+        public Users() { }
 
 
         //private method to hash the password
@@ -30,23 +32,40 @@ namespace MrBobsMemberRegister
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public void AddUser()
+        public bool AddUser()
         {
             // Add the user to the database
 
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                conn.Open();
-                string query = "INSERT INTO Users (Name, PasswordHash) VALUES (@Name, @PasswordHash)";
+            string PasswordHash = HashPassword(Password);
 
-                using (SqlCommand command = new SqlCommand(query, conn))
+            if (!Exists() && Name != "" && Password != "") //if they do not already exist on the database
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    command.Parameters.AddWithValue("@Name", Name);
-                    command.Parameters.AddWithValue("@PasswordHash", PasswordHash);
-                    command.ExecuteNonQuery();
-                    Console.WriteLine("User added to Database");
+                    conn.Open();
+                    string query = "INSERT INTO Bob_Users (Name, PasswordHash) VALUES (@Name, @PasswordHash)";
+
+                    using (SqlCommand command = new SqlCommand(query, conn))
+                    {
+                        command.Parameters.AddWithValue("@Name", Name);
+                        command.Parameters.AddWithValue("@PasswordHash", PasswordHash);
+                        command.ExecuteNonQuery();
+                        Console.WriteLine("User added to Database");
+                        Console.ReadKey();
+                    }
                 }
+
+                return true;
             }
+            else
+            {
+                
+                Console.WriteLine("Error when adding user!");
+                Console.ReadKey();
+                return false;
+            }
+
+
         }
 
         public bool Exists()
@@ -55,7 +74,7 @@ namespace MrBobsMemberRegister
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                string query = "SELECT COUNT(*) FROM Users WHERE Name = @Name";
+                string query = "SELECT COUNT(*) FROM Bob_Users WHERE Name = @Name";
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@Name", Name);
@@ -66,18 +85,18 @@ namespace MrBobsMemberRegister
         }
 
         //method to check if the password is correct against the database using the user Name
-        public bool CheckPassword(string password)
+        public bool CheckPassword()
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
-                string query = "SELECT PasswordHash FROM Users WHERE Name = @Name";
+                string query = "SELECT PasswordHash FROM Bob_Users WHERE Name = @Name";
 
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@Name", Name);
-                    string PasswordHash = (string)command.ExecuteScalar();
-                    return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
+                    string PasswordHash = (string)command.ExecuteScalar(); //returns the password hash from the database
+                    return BCrypt.Net.BCrypt.Verify(Password, PasswordHash); //compares the password entered with the hash from the database
                 }
             }
 

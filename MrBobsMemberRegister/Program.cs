@@ -24,7 +24,7 @@ namespace MrBobsMemberRegister
             {
                 user = LoginScreen();
             }
-            while (user != null);
+            while (user == null);
             
            
 
@@ -91,51 +91,59 @@ namespace MrBobsMemberRegister
             Console.WriteLine("0. Exit Application\n");
 
             ConsoleKeyInfo choice = Console.ReadKey(false);
-            Users user = null;
+            Users user = new Users();
+            string username;
+            string password;
 
             switch (choice.KeyChar)
             {
-                case '0':
+                case '0': //Exit Application
 
                     Console.Clear();
                     Console.WriteLine("Exiting...");
                     Environment.Exit(0); // exits the application
                     break;
 
-                case '1':
-
-                    Console.WriteLine("Enter your username: ");
-                    string username = Console.ReadLine();
-    
-                    Console.WriteLine("Enter your password: ");
-                    string password = Console.ReadLine();
-
-                    user = new Users(username, password);
+                case '1': //Login
+                   
 
                     //entering info loop
                     while (true)
                     {
+
+                        Console.WriteLine(" - Login to Bob's Member Register");
+
+                        Console.WriteLine("\nEnter your username: ");
+                        username = Console.ReadLine();
+
+                        Console.WriteLine("\nEnter your password: ");
+                        password = Console.ReadLine();
+
+                        user.Name = username;
+                        user.Password = password;
+
                         if (user.Exists())
                         {
-                            if (user.CheckPassword(user.PasswordHash))
+                            if (user.CheckPassword())
                             {
                                 //returns the user if the password is correct
-                                Console.WriteLine("User exists and password is correct");
+                                Console.WriteLine("User exists and password is correct\nPress anything to continue!");
+                                Console.ReadKey();
                                 break;
                             }
                             else
                             {
                                 Console.WriteLine("Password is incorrect");
-                                Console.WriteLine("Enter your password or press 0 to cancel: ");
+                                Console.WriteLine("Press anything to try again or press 0 to cancel: ");
 
-                                switch (Console.ReadLine())
+                                switch (Console.ReadKey(true).KeyChar)
                                 {
-                                    case "0":
+                                    case '0':
                                         //returning null restarts LoginScreen method
                                         return null;
 
                                     default:
-                                        user.PasswordHash = Console.ReadLine();
+                                        Console.Clear();
                                         break;
                                 }
                             }
@@ -143,16 +151,17 @@ namespace MrBobsMemberRegister
                         else
                         {
                             Console.WriteLine("User does not exist in the database");
-                            Console.WriteLine("Enter your username or press 0 to cancel: ");
+                            Console.WriteLine("Press anything to try again or press 0 to cancel: ");
 
-                            switch (Console.ReadLine())
+                            switch (Console.ReadKey(true).KeyChar)
                             {
-                                case "0":
+                                case '0':
                                     //returning null restarts LoginScreen method
+                                    
                                     return null;
 
                                 default:
-                                    user.Name = Console.ReadLine();
+                                    Console.Clear();
                                     break;
                             }
                         }
@@ -162,11 +171,32 @@ namespace MrBobsMemberRegister
                     //exits login screen loop with verified user
                     return user;
 
-                case '2':
-                    Console.WriteLine("Register()");
+                case '2': //Register
+                    Console.WriteLine(" - Register a new user!");
+
+                    Console.WriteLine("\nEnter your username: ");
+                    username = Console.ReadLine();
+
+                    Console.WriteLine("\nEnter your password: ");
+                    password = Console.ReadLine();
+
+                    user.Name = username;
+                    user.Password = password;
+
+                    bool valid = user.AddUser();
+
+                    if (user.Exists() && valid)
+                    {
+
+                        Console.WriteLine("Welcome new user: " + user.Name);
+                    }
+
                     return null;
 
                 case '3':
+
+                    Console.WriteLine("\n\nOption under maintenance!\nPress anything to pick again!");
+                    Console.ReadKey(true);
                     return null;
 
                 default:
